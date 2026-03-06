@@ -1,4 +1,4 @@
-# Build5Nines/myip/network
+# Build5Nines MyIP Terraform Module (Retrieve Local IP for PC running Terraform)
 
 Stop hard-coding IP addresses in your firewall rules and security groups.
 This Terraform module automatically detects the **public IPv4 address** of the
@@ -16,7 +16,7 @@ What you get:
 
 ```hcl
 module "myip" {
-  source  = "Build5Nines/myip/network"
+  source  = "Build5Nines/myip/http"
 }
 
 output "my_public_ip" {
@@ -36,7 +36,7 @@ my_public_ip = "203.0.113.42"
 
 ```hcl
 module "myip" {
-  source  = "Build5Nines/myip/network"
+  source  = "Build5Nines/myip/http"
 }
 
 resource "azurerm_network_security_rule" "allow_ssh" {
@@ -58,7 +58,7 @@ resource "azurerm_network_security_rule" "allow_ssh" {
 
 ```hcl
 module "myip" {
-  source  = "Build5Nines/myip/network"
+  source  = "Build5Nines/myip/http"
 }
 
 resource "aws_security_group_rule" "allow_ssh" {
@@ -75,7 +75,7 @@ resource "aws_security_group_rule" "allow_ssh" {
 
 ```hcl
 module "myip" {
-  source  = "Build5Nines/myip/network"
+  source  = "Build5Nines/myip/http"
 }
 
 resource "google_compute_firewall" "allow_ssh" {
@@ -98,7 +98,7 @@ the `url` variable:
 
 ```hcl
 module "myip" {
-  source  = "Build5Nines/myip/network"
+  source  = "Build5Nines/myip/http"
   url     = "https://api.ipify.org"
 }
 ```
