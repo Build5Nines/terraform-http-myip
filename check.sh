@@ -4,4 +4,6 @@ terraform init
 
 terraform validate
 
+terraform plan
+
 terraform test
