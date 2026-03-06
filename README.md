@@ -1,12 +1,13 @@
 # Build5Nines MyIP Terraform Module (Retrieve Local IP for PC running Terraform)
 
 Stop hard-coding IP addresses in your firewall rules and security groups.
-This Terraform module automatically detects the **public IPv4 address** of the
+This Terraform module automatically detects the **public IP address** of the
 machine running Terraform, so you can dynamically lock down access to only your
 current location — no manual lookups, no stale addresses.
 
 What you get:
 
+- **Returns IPv4 IP Address by Default:** The default usage of the module returns the IPv4 IP Address, but is configurable for IPv6 if necessary.
 - **Zero manual steps:** No more visiting "what is my IP" websites — the module does it for you.
 - **Always current:** Every `terraform apply` picks up your latest public IP, keeping firewall rules in sync with where you actually are.
 - **Works everywhere:** Use with Azure NSGs, AWS Security Groups, GCP firewall rules, or any resource that accepts a CIDR block.
@@ -103,7 +104,21 @@ module "myip" {
 }
 ```
 
-Any URL that returns a plain-text IPv4 address will work.
+Any URL that returns a plain-text IP address will work.
+
+### IPv6 Address
+
+If you need to retrieve the IPv6 address, override
+the `url` variable as follows:
+
+```hcl
+module "myip" {
+  source  = "Build5Nines/myip/http"
+  url     = "https://ipv6.icanhazip.com"
+}
+```
+
+This will return the Public IPv6 address of the local machine.
 
 ## Inputs
 
@@ -117,7 +132,7 @@ Any URL that returns a plain-text IPv4 address will work.
 
 | Name | Description |
 |------|-------------|
-| `ip_address` | The public IPv4 address of the machine running Terraform. |
+| `ip_address` | The public IP address of the machine running the Terraform plan or apply. |
 
 ## How It Works
 
