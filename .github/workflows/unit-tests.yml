@@ -33,6 +33,10 @@ jobs:
         id: validate
         run: terraform validate -no-color
 
+      - name: Terraform Plan
+        id: plan
+        run: terraform plan -no-color
+
       - name: Terraform test
         id: test
         run: terraform test -no-color
