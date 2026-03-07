@@ -120,11 +120,33 @@ module "myip" {
 
 This will return the Public IPv6 address of the local machine.
 
+### Custom HTTP Headers
+
+If you need to customize the HTTP headers sent with the IP lookup request (for
+example, to pass an authorization token or a custom `User-Agent`), override the
+`request_headers` variable:
+
+```hcl
+module "myip" {
+  source  = "Build5Nines/myip/http"
+
+  request_headers = {
+    Accept     = "text/plain"
+    User-Agent = "Terraform"
+  }
+}
+```
+
+The value is a map of header names to values. The default sends a single
+`Accept: text/plain` header, which is sufficient for most plain-text IP lookup
+services.
+
 ## Inputs
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|----------|
 | `url` | The URL to query for the public IP address. Must return a plain-text IPv4 address. | `string` | `"https://ipv4.icanhazip.com"` | no |
+| `request_headers` | The HTTP headers to include in the GET request. | `map(any)` | `{ Accept = "text/plain" }` | no |
 
 > The default URL (`https://ipv4.icanhazip.com`) is hosted by Cloudflare and returns the caller's IPv4 address in plain text.
 
